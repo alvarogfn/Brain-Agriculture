@@ -3,11 +3,9 @@ import { theme } from 'styled-bettertools';
 
 export const StyledButton = styled.buttonBox`
   padding: 10px 15px;
-  border-radius: ${theme('radii.1')};
+  border-radius: ${theme('radii.xl')};
 
-  border-width: ${theme('borderWidths.1')};
-  border-style: solid;
-  border-color: ${theme('colors.button.borderDefault')};
+  background-color: ${theme('colors.blue-300')};
 
   display: flex;
   justify-content: center;

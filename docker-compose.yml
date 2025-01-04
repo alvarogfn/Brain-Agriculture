@@ -1,11 +1,14 @@
 version: '3.8'
 
 services:
-  octopost-db:
-    image: postgres:latest
+  database:
+    image: postgres:17.2
+    restart: always
+    container_name: postgres
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: 'password'
-      POSTGRES_DB: 'octopost'
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - /tmp/database:/var/lib/postgresql/data
+  

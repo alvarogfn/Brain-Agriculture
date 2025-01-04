@@ -5,11 +5,8 @@ import { StyledBox } from './styles';
 
 import type { BoxProps } from '.';
 
-function Box(
-  { 'data-testid': datatestId = 'box', ...props }: BoxProps,
-  ref: ForwardedRef<HTMLDivElement>,
-) {
-  return <StyledBox data-testid={datatestId} {...props} ref={ref} />;
+function Box({ ...props }: BoxProps, ref: ForwardedRef<HTMLDivElement>) {
+  return <StyledBox {...props} ref={ref} />;
 }
 
 export default forwardRef(Box) as typeof Box;

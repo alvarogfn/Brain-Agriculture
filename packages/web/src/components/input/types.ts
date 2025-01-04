@@ -1,16 +1,11 @@
-import type { ComponentPropsWithRef, ReactNode } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
 import type { Box } from '../box';
-import type { StyledInput } from './styles';
+import type { StyledInput, StyledLabel } from './styles';
 
-export type InputProps = {
+export interface InputProps extends ComponentPropsWithRef<typeof StyledInput> {
   containerProps?: ComponentPropsWithRef<typeof Box>;
-  'data-testid'?: string;
-  prefix?: ReactNode;
-  suffix?: ReactNode;
-} & Omit<ComponentPropsWithRef<typeof StyledInput>, 'prefix'> &
-  StyledTextboxProps;
-
-export type StyledTextboxProps = {
-  hasError?: boolean;
-};
+  helperText?: string;
+  labelProps?: ComponentPropsWithRef<typeof StyledLabel>;
+  labelText: string;
+}

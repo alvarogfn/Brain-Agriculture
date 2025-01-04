@@ -5,7 +5,7 @@ import {
   ThemeProvider as StyledThemeProvider,
 } from '@xstyled/styled-components';
 
-import { GlobalStyles } from '@/themes/styles';
+import { GlobalStyles } from '@/themes/global-styles';
 
 type ThemeProviderProps = PropsWithChildren<{}>;
 

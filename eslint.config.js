@@ -9,21 +9,16 @@ import vitest from 'eslint-plugin-vitest';
 import globals from 'globals';
 import tsEslint from 'typescript-eslint';
 
-const project = [
-  './tsconfig.json',
-  'packages/*/tsconfig.json',
-  'packages/*/tsconfig.node.json',
-  'packages/*/tsconfig.app.json',
-];
+const project = ['./tsconfig.json', 'packages/**/*/tsconfig.json'];
 
 export default defineFlatConfig([
   // global ignores
   {
     ignores: [
-      'node_modules',
-      'coverage',
-      'dist',
-      'build',
+      '**/node_modules',
+      '**/coverage',
+      '**/dist',
+      '**/build',
       'pnpm-lock.yaml',
       'docker-compose.yml',
       'package.json',
@@ -48,7 +43,8 @@ export default defineFlatConfig([
   unicorn.configs['flat/recommended'],
 
   {
-    files: ['**/*.ts', '**/*.js', '**/*.jsx', '**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx'],
+
     languageOptions: {
       parser: tsEslint.parser,
       parserOptions: {
@@ -60,76 +56,7 @@ export default defineFlatConfig([
     plugins: {
       '@typescript-eslint': tsEslint.plugin,
       'import-x': importX,
-      perfectionist,
     },
-    rules: {
-      'import-x/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
-      'import-x/default': 'warn',
-      'import-x/export': 'warn',
-      'import-x/namespace': 'warn',
-      'import-x/newline-after-import': 'warn',
-      'import-x/no-absolute-path': 'warn',
-      'import-x/no-cycle': ['warn', { maxDepth: 3 }],
-      'import-x/no-duplicates': 'warn',
-      'import-x/no-named-as-default': 'warn',
-      'import-x/no-named-as-default-member': 'warn',
-      'import-x/no-self-import': 'warn',
-      'import-x/no-unused-modules': 'warn',
-
-      'perfectionist/sort-array-includes': 'warn',
-      'perfectionist/sort-classes': 'warn',
-      'perfectionist/sort-enums': 'warn',
-      'perfectionist/sort-exports': 'warn',
-      'perfectionist/sort-imports': [
-        'warn',
-        {
-          customGroups: {
-            type: {
-              react: ['react', 'react-*'],
-            },
-            value: {
-              react: ['react', 'react-*'],
-            },
-          },
-          groups: [
-            'react',
-            ['builtin', 'builtin-type', 'external', 'external-type'],
-            ['internal', 'internal-type'],
-            ['parent', 'parent-type', 'sibling', 'sibling-type'],
-            ['index', 'index-type'],
-          ],
-          internalPattern: ['@/**'],
-        },
-      ],
-      'perfectionist/sort-interfaces': 'warn',
-      'perfectionist/sort-jsx-props': 'warn',
-      'perfectionist/sort-maps': 'warn',
-      'perfectionist/sort-named-exports': 'warn',
-      'perfectionist/sort-object-types': 'warn',
-      'perfectionist/sort-objects': 'warn',
-      'perfectionist/sort-union-types': 'warn',
-
-      'unicorn/no-null': 'off',
-      'unicorn/prevent-abbreviations': 'off',
-    },
-    settings: {
-      'import/parsers': {
-        '@typescript-eslint/parser': ['.ts', '.tsx'],
-        espree: ['.js', '.cjs', '.mjs', '.jsx'],
-      },
-      'import/resolver': {
-        node: {
-          extensions: ['.js', '.ts'],
-        },
-        typescript: {
-          alwaysTryTypes: true,
-          project,
-        },
-      },
-    },
-  },
-
-  {
     rules: {
       '@typescript-eslint/await-thenable': 'warn',
       '@typescript-eslint/ban-ts-comment': 'warn',
@@ -144,6 +71,7 @@ export default defineFlatConfig([
       '@typescript-eslint/no-duplicate-type-constituents': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-extra-non-null-assertion': 'warn',
+
       '@typescript-eslint/no-floating-promises': 'warn',
       '@typescript-eslint/no-for-in-array': 'warn',
       '@typescript-eslint/no-implied-eval': 'warn',
@@ -190,6 +118,83 @@ export default defineFlatConfig([
       '@typescript-eslint/restrict-template-expressions': 'warn',
       '@typescript-eslint/triple-slash-reference': 'warn',
       '@typescript-eslint/unbound-method': 'warn',
+      'import-x/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
+      'import-x/default': 'warn',
+      'import-x/export': 'warn',
+      'import-x/namespace': 'warn',
+      'import-x/newline-after-import': 'warn',
+      'import-x/no-absolute-path': 'warn',
+      'import-x/no-cycle': ['warn', { maxDepth: 3 }],
+      'import-x/no-duplicates': 'warn',
+      'import-x/no-self-import': 'warn',
+      'import-x/no-unused-modules': 'warn',
+    },
+    settings: {
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project,
+        },
+      },
+    },
+  },
+
+  {
+    files: ['**/*.ts', '**/*.js', '**/*.jsx', '**/*.tsx'],
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      perfectionist,
+    },
+    rules: {
+      'perfectionist/sort-array-includes': 'warn',
+      'perfectionist/sort-classes': 'warn',
+      'perfectionist/sort-enums': 'warn',
+      'perfectionist/sort-exports': 'warn',
+      'perfectionist/sort-imports': [
+        'warn',
+        {
+          customGroups: {
+            type: {
+              react: ['react', 'react-*'],
+            },
+            value: {
+              react: ['react', 'react-*'],
+            },
+          },
+          groups: [
+            'react',
+            ['builtin', 'builtin-type', 'external', 'external-type'],
+            ['internal', 'internal-type'],
+            ['parent', 'parent-type', 'sibling', 'sibling-type'],
+            ['index', 'index-type'],
+          ],
+          internalPattern: ['@/**'],
+        },
+      ],
+      'perfectionist/sort-interfaces': 'warn',
+      'perfectionist/sort-jsx-props': 'warn',
+      'perfectionist/sort-maps': 'warn',
+      'perfectionist/sort-named-exports': 'warn',
+      'perfectionist/sort-object-types': 'warn',
+      'perfectionist/sort-objects': 'warn',
+      'perfectionist/sort-union-types': 'warn',
+
+      'unicorn/no-null': 'off',
+      'unicorn/prefer-top-level-await': 'off',
+      'unicorn/prevent-abbreviations': 'off',
+    },
+    settings: {
+      'import/parsers': {
+        espree: ['.js', '.cjs', '.mjs', '.jsx'],
+      },
     },
   },
 

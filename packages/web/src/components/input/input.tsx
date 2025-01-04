@@ -1,57 +1,43 @@
-import type { ForwardedRef} from "react";
-import { forwardRef, useRef } from "react";
+import type { ForwardedRef } from 'react';
+import { forwardRef } from 'react';
+import { useId } from 'react';
 
-import { useForkRef } from "@/hooks/use-fork-ref";
+import {
+  StyledInput,
+  StyledLabel,
+  StyledHelperText,
+  StyledContainer,
+} from './styles';
 
-import { StyledInput, StyledSibling, StyledTextbox } from "./styles";
-
-import type { InputProps } from ".";
+import type { InputProps } from '.';
 
 function Input(
   {
     containerProps,
-    "data-testid": datatestId = "input",
-    hasError,
+    $variant,
+    helperText,
+    labelProps,
+    labelText,
     id,
-    prefix,
-    suffix,
     ...props
   }: InputProps,
   ref: ForwardedRef<HTMLInputElement>,
 ) {
-  const input = useRef<HTMLInputElement | null>(null);
-
-  const forkRef = useForkRef(input, ref);
-
-  const handleFocus = () => {
-    input.current?.focus();
-  };
+  const automaticId = useId();
 
   return (
-    <StyledTextbox
-      data-testid={`${datatestId}-textbox`}
-      hasError={hasError}
-      onClick={handleFocus}
-      {...containerProps}
-    >
-      {prefix && (
-        <StyledSibling
-          borderRightStyle="solid"
-          data-testid={`${datatestId}-prefix`}
-        >
-          {prefix}
-        </StyledSibling>
-      )}
-      <StyledInput data-testid={datatestId} id={id} ref={forkRef} {...props} />
-      {suffix && (
-        <StyledSibling
-          borderLeftStyle="solid"
-          data-testid={`${datatestId}-suffix`}
-        >
-          {suffix}
-        </StyledSibling>
-      )}
-    </StyledTextbox>
+    <StyledContainer>
+      <StyledLabel {...labelProps} htmlFor={id ?? automaticId}>
+        {labelText}
+      </StyledLabel>
+      <StyledInput
+        $variant={$variant}
+        id={id ?? automaticId}
+        ref={ref}
+        {...props}
+      />
+      {helperText && <StyledHelperText>{helperText}</StyledHelperText>}
+    </StyledContainer>
   );
 }
 
