@@ -24,7 +24,9 @@ function customRender<
     wrapper: ({ children }) => (
       <I18nextProvider i18n={i18nInstance}>
         <ThemeProvider>
-          <QueryClientProvider client={queryClient}></QueryClientProvider>
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
         </ThemeProvider>
       </I18nextProvider>
     ),

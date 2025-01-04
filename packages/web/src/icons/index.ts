@@ -1,5 +1,9 @@
-const icons = {};
+import { createElement } from 'react';
 
-export type IconType = keyof typeof icons;
+const icons = {
+  base: () => createElement('svg'),
+};
+
+export type Icons = keyof typeof icons;
 
 export default icons;

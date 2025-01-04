@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["@testing-library/jest-dom", "jest", "node"],
     "target": "ES2020",
     "lib": ["DOM", "ESNext"],
     "module": "ESNext",
@@ -19,5 +20,5 @@
     "useDefineForClassFields": true,
     "allowImportingTsExtensions": true
   },
-  "include": ["src", "rsbuild.config.ts"]
+  "include": ["**/*"]
 }

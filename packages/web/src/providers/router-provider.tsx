@@ -3,18 +3,18 @@ import {
   RouterProvider as ReactRouterProvider,
 } from 'react-router';
 
-import HomePage from '@/pages/home/page';
+import CropRoute from '@/pages/crop/route';
+import DashBoardRoute from '@/pages/dashboard/route';
+import FarmRoute from '@/pages/farm/route';
+import FarmerRoute from '@/pages/farmer/route';
+import HarvestRoute from '@/pages/harvest/route';
+import HomeRoute from '@/pages/home/route';
 
 const router = createBrowserRouter([
   {
-    element: <HomePage />,
-    path: '/',
+    ...HomeRoute,
+    children: [DashBoardRoute, FarmerRoute, FarmRoute, HarvestRoute, CropRoute],
   },
-  {
-    element: <div>Not Found</div>,
-    path: '*',
-  },
-  {},
 ]);
 
 export function RouterProvider() {

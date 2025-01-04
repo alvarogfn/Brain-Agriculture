@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-restricted-imports */
-import type { ITheme } from '@xstyled/styled-components';
+import type { ITheme, DefaultTheme } from '@xstyled/styled-components';
 import '@xstyled/system';
 import 'styled-components';
-
-import type { DefaultTheme } from '@/themes/default';
 
 interface AppTheme extends ITheme, DefaultTheme {}
 
