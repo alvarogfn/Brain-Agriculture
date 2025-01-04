@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest';
-
 import { queryUserMe } from '@/api/user-me';
 
 describe('[Helpers]: defineQuery', () => {

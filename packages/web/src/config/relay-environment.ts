@@ -1,16 +1,16 @@
-import {createClient} from "graphql-ws";
+import { createClient } from 'graphql-ws';
 import type {
-	GraphQLResponse,
-	SubscribeFunction,
-	Environment,
-	type FetchFunction,
-	Network,
-	Observable,
-	RecordSource,
-	Store
-} from "relay-runtime";
+  GraphQLResponse,
+  SubscribeFunction,
+  Environment,
+  type FetchFunction,
+  Network,
+  Observable,
+  RecordSource,
+  Store,
+} from 'relay-runtime';
 
-import {env} from "@/config/env";
+import { env } from '@/config/env';
 
 const HTTP_ENDPOINT = env.API_URL;
 
@@ -21,26 +21,35 @@ const wsClient = createClient({
   url: env.WEBSOCKET_API_URL,
 });
 
-const isGraphQLResponse = (value: unknown): value is GraphQLResponse => Boolean(value && typeof value === "object" && "data" in value && value.data !== null);
+const isGraphQLResponse = (value: unknown): value is GraphQLResponse =>
+  Boolean(
+    value &&
+      typeof value === 'object' &&
+      'data' in value &&
+      value.data !== null,
+  );
 
-const subscribe: SubscribeFunction = (operation, variables) => Observable.create((sink) => wsClient.subscribe(
-        {
-          operationName: operation.name,
-          query: operation.text!,
-          variables,
+const subscribe: SubscribeFunction = (operation, variables) =>
+  Observable.create((sink) =>
+    wsClient.subscribe(
+      {
+        operationName: operation.name,
+        query: operation.text!,
+        variables,
+      },
+      {
+        complete: sink.complete,
+        error: sink.error,
+        next: (value) => {
+          if (isGraphQLResponse(value)) {
+            sink.next(value);
+          } else {
+            sink.error(new Error('Invalid GraphQL response'));
+          }
         },
-        {
-          complete: sink.complete,
-          error: sink.error,
-          next: (value) => {
-            if (isGraphQLResponse(value)) {
-              sink.next(value);
-            } else {
-              sink.error(new Error("Invalid GraphQL response"));
-            }
-          },
-        },
-    ));
+      },
+    ),
+  );
 
 const fetchFn: FetchFunction = async (request, variables) => {
   const resp = await fetch(HTTP_ENDPOINT, {
@@ -48,12 +57,13 @@ const fetchFn: FetchFunction = async (request, variables) => {
       query: request.text, // <-- The GraphQL document composed by Relay
       variables,
     }),
-    credentials: "include",
+    credentials: 'include',
     headers: {
-      Accept: "application/graphql-response+json; charset=utf-8, application/json; charset=utf-8",
-      "Content-Type": "application/json",
+      Accept:
+        'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
+      'Content-Type': 'application/json',
     },
-    method: "POST",
+    method: 'POST',
   });
 
   return await resp.json();

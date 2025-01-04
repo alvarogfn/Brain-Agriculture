@@ -1,2 +1,1 @@
-export { queryUserMe } from "./query";
-export * from "./types";
+export { queryUserMe } from './query';

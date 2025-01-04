@@ -1,9 +1,9 @@
-import { use } from 'i18next';
+import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { en, pt } from './languages';
 
-void use(LanguageDetector).init({
+void i18n.use(LanguageDetector).init({
   debug: false,
   defaultNS: 'common',
   fallbackLng: 'pt',
@@ -18,3 +18,5 @@ void use(LanguageDetector).init({
     },
   },
 });
+
+export { default } from 'i18next';

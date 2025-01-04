@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-restricted-imports */
 import type { ReactNode } from 'react';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { queries, Queries } from '@testing-library/dom';
 import type { RenderOptions, RenderResult } from '@testing-library/react';
 import { render } from '@testing-library/react';
 
-import { Providers } from './providers';
+import { ThemeProvider } from '@/providers/theme-provider';
+
+import i18nInstance, { I18nextProvider } from '../i18n';
+
+const queryClient = new QueryClient();
 
 function customRender<
   Container extends HTMLElement,
@@ -15,7 +20,16 @@ function customRender<
   ui: ReactNode,
   options?: RenderOptions<Q, Container, BaseElement>,
 ): RenderResult<Q, Container, BaseElement> {
-  return render(ui, { wrapper: Providers, ...options });
+  return render(ui, {
+    wrapper: ({ children }) => (
+      <I18nextProvider i18n={i18nInstance}>
+        <ThemeProvider>
+          <QueryClientProvider client={queryClient}></QueryClientProvider>
+        </ThemeProvider>
+      </I18nextProvider>
+    ),
+    ...options,
+  });
 }
 
 // eslint-disable-next-line import-x/export

@@ -1,5 +1,4 @@
 import type { AxiosResponse } from 'axios';
-import { describe, expect, it } from 'vitest';
 
 import { HttpError } from './http-error';
 

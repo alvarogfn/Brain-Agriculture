@@ -1,12 +1,12 @@
-import {StrictMode} from "react";
+import { StrictMode } from 'react';
 
-import {createRoot} from "react-dom/client";
+import { createRoot } from 'react-dom/client';
 
-import App from "@/app";
+import App from '@/app';
 
-import "./i18n";
+import './i18n';
 
-const rootElement = document.querySelector("#root");
+const rootElement = document.querySelector('#root');
 
 if (rootElement) {
   const root = createRoot(rootElement);
