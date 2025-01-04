@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {},
+  "include": [
+    "commitlint.config.ts",
+    "eslint.config.js"
+  ]
+}
