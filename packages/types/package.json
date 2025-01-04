@@ -1,0 +1,22 @@
+{
+  "name": "brain-agriculture-backend-types",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "clear && tsc --project tsconfig.json",
+    "clear": "rimraf dist",
+    "dev": "tsc --project tsconfig.json --watch",
+    "prepare": "ts-patch install -s",
+    "typecheck": "tsc --project tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.5",
+    "ts-patch": "3.3.0",
+    "rimraf": "6.0.1",
+    "tsconfig-paths": "4.2.0",
+    "typescript": "5.7.2",
+    "typescript-transform-paths": "3.5.3"
+  }
+}
