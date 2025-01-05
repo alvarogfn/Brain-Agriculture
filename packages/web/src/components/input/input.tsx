@@ -1,6 +1,5 @@
 import type { ForwardedRef } from 'react';
-import { forwardRef } from 'react';
-import { useId } from 'react';
+import { forwardRef, useId } from 'react';
 
 import {
   StyledInput,
@@ -13,12 +12,12 @@ import type { InputProps } from '.';
 
 function Input(
   {
-    containerProps,
     $variant,
+    containerProps,
     helperText,
-    labelProps,
-    labelText,
     id,
+    label,
+    labelProps,
     ...props
   }: InputProps,
   ref: ForwardedRef<HTMLInputElement>,
@@ -28,7 +27,7 @@ function Input(
   return (
     <StyledContainer>
       <StyledLabel {...labelProps} htmlFor={id ?? automaticId}>
-        {labelText}
+        {label}
       </StyledLabel>
       <StyledInput
         $variant={$variant}

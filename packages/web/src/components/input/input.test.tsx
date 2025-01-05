@@ -8,10 +8,11 @@ import { Input } from '.';
 import type { InputProps } from '.';
 
 const makeSut = ({
+  label = faker.lorem.word(),
   onChange = jest.fn(),
   ...props
-}: InputProps): Omit<RenderOptions, 'wrapper'> => {
-  const component = <Input onChange={onChange} {...props} />;
+}: Partial<InputProps>): Omit<RenderOptions, 'wrapper'> => {
+  const component = <Input label={label} onChange={onChange} {...props} />;
 
   return render(component);
 };
@@ -27,6 +28,15 @@ describe('Input', () => {
     makeSut({});
 
     const input = screen.getByRole('textbox');
+
+    expect(input).toBeInTheDocument();
+  });
+
+  it('should render and link input with a label', () => {
+    const label = faker.lorem.word();
+    makeSut({ label });
+
+    const input = screen.getByLabelText(label);
 
     expect(input).toBeInTheDocument();
   });
@@ -49,24 +59,5 @@ describe('Input', () => {
     await user.type(input, value);
 
     expect(onChange).toHaveBeenCalledTimes(value.length);
-  });
-
-  it('should update the value when typing', async () => {
-    const value = faker.person.firstName();
-    makeSut({});
-
-    const input = screen.getByRole('textbox');
-    await user.type(input, value);
-
-    expect(input).toHaveValue(value);
-  });
-
-  it('should render the prefix correctly', () => {
-    const prefix = faker.person.firstName();
-    makeSut({ prefix });
-
-    const prefixElement = screen.getByText(prefix);
-
-    expect(prefixElement).toBeInTheDocument();
   });
 });

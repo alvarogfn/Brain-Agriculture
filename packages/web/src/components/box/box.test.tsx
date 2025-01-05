@@ -13,19 +13,11 @@ const makeSut = (props: Partial<BoxProps>): Omit<RenderOptions, 'wrapper'> => {
 };
 
 describe('Box', () => {
-  it('should render the component', () => {
-    makeSut({ children: 'Box' });
-
-    const box = screen.getByTestId('box');
-
-    expect(box).toBeInTheDocument();
-  });
-
-  it('should render the component with correct text', () => {
+  it('should render the component with correct children', () => {
     const children = faker.lorem.words(1);
     makeSut({ children });
 
-    const box = screen.getByTestId('box');
+    const box = screen.getByText(children);
 
     expect(box).toHaveTextContent(children);
   });

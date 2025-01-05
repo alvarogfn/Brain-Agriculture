@@ -1,8 +1,6 @@
 import styled, { css } from '@xstyled/styled-components';
 import { switchProp, theme } from 'styled-bettertools';
 
-import { Box } from '@/components/box';
-
 export const StyledContainer = styled.divBox`
   display: flex;
   flex-direction: column;

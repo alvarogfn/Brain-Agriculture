@@ -6,6 +6,6 @@ import type { StyledInput, StyledLabel } from './styles';
 export interface InputProps extends ComponentPropsWithRef<typeof StyledInput> {
   containerProps?: ComponentPropsWithRef<typeof Box>;
   helperText?: string;
+  label: string;
   labelProps?: ComponentPropsWithRef<typeof StyledLabel>;
-  labelText: string;
 }

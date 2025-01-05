@@ -5,10 +5,10 @@ import { StyledButton } from './styles';
 import type { ButtonProps } from './types';
 
 function Button(
-  { $variant, ...props }: ButtonProps,
+  { ...props }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>,
 ) {
-  return <StyledButton $variant={$variant} {...props} ref={ref} />;
+  return <StyledButton {...props} ref={ref} />;
 }
 
 export default forwardRef(Button) as typeof Button;
