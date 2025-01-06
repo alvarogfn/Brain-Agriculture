@@ -25,9 +25,10 @@ export const GlobalStyles = createGlobalStyle`
   button {
     border: initial;
     cursor: pointer;
+    background: initial;
   }
   
-  input {
+  ul, li {
+    list-style: none;
   }
-
 `;

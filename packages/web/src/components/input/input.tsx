@@ -23,6 +23,7 @@ function Input(
   ref: ForwardedRef<HTMLInputElement>,
 ) {
   const automaticId = useId();
+  const helperTextId = useId();
 
   return (
     <StyledContainer>
@@ -31,11 +32,14 @@ function Input(
       </StyledLabel>
       <StyledInput
         $variant={$variant}
+        aria-describedby={helperText && helperTextId}
         id={id ?? automaticId}
         ref={ref}
         {...props}
       />
-      {helperText && <StyledHelperText>{helperText}</StyledHelperText>}
+      {helperText && (
+        <StyledHelperText id={helperTextId}>{helperText}</StyledHelperText>
+      )}
     </StyledContainer>
   );
 }

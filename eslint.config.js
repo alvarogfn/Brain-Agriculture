@@ -29,7 +29,6 @@ export default defineFlatConfig([
   {
     ...js.configs.recommended,
     rules: {
-      'arrow-body-style': ['warn', 'as-needed'],
       'class-methods-use-this': 'off',
       'dot-notation': 'off',
       'max-params': 'off',
@@ -76,7 +75,6 @@ export default defineFlatConfig([
       '@typescript-eslint/no-for-in-array': 'warn',
       '@typescript-eslint/no-implied-eval': 'warn',
       '@typescript-eslint/no-misused-new': 'warn',
-      '@typescript-eslint/no-misused-promises': 'warn',
       '@typescript-eslint/no-namespace': 'warn',
       '@typescript-eslint/no-non-null-asserted-optional-chain': 'warn',
       '@typescript-eslint/no-redundant-type-constituents': 'warn',

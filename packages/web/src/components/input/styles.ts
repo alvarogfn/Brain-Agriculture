@@ -8,7 +8,7 @@ export const StyledContainer = styled.divBox`
   font-size: 1.6rem;
 `;
 
-export const StyledHelperText = styled.divBox`
+export const StyledHelperText = styled.pBox`
   font-size: 1rem;
   padding: ${theme('space.2')};
 `;
@@ -17,9 +17,9 @@ export const StyledLabel = styled.labelBox`
   padding-inline: ${theme('space.2')};
 `;
 
-type StyledInputProps = {
+interface StyledInputProps {
   $variant?: 'error' | 'normal';
-};
+}
 
 export const StyledInput = styled.inputBox<StyledInputProps>`
   padding: 0.5rem;

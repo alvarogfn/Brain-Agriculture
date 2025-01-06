@@ -1,7 +1,7 @@
-import { createElement } from 'react';
+import IconClose from './icon-close';
 
 const icons = {
-  base: () => createElement('svg'),
+  close: IconClose,
 };
 
 export type Icons = keyof typeof icons;

@@ -41,5 +41,9 @@
     "overrides": {
       "micromatch@<4.0.8": ">=4.0.8"
     }
+  },
+  "dependencies": {
+    "@hookform/resolvers": "3.9.1",
+    "yup": "1.6.1"
   }
 }
