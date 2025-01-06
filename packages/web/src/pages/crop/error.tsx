@@ -1,10 +1,9 @@
+import { useRouteError } from 'react-router';
+
 function CropErrorPage() {
-  return (
-    <div>
-      <h1>Sign Up Error</h1>
-      <p>There was an error signing up.</p>
-    </div>
-  );
+  const error = useRouteError();
+
+  return <div>{JSON.stringify(error)}</div>;
 }
 
 export default CropErrorPage;
