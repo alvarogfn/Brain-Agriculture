@@ -17,4 +17,9 @@ describe('HealthcheckController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  it('should return status ok on healthcheck', () => {
+    const result = controller.healthcheck();
+    expect(result).toEqual({ status: 'ok' });
+  });
 });
