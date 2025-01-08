@@ -2,10 +2,10 @@ import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import { defineFlatConfig } from 'eslint-define-config';
 import importX from 'eslint-plugin-import-x';
+import jest from 'eslint-plugin-jest';
 import 'eslint-plugin-only-warn';
 import perfectionist from 'eslint-plugin-perfectionist';
 import unicorn from 'eslint-plugin-unicorn';
-import vitest from 'eslint-plugin-vitest';
 import globals from 'globals';
 import tsEslint from 'typescript-eslint';
 
@@ -68,7 +68,6 @@ export default defineFlatConfig([
       '@typescript-eslint/no-base-to-string': 'warn',
       '@typescript-eslint/no-duplicate-enum-values': 'warn',
       '@typescript-eslint/no-duplicate-type-constituents': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-extra-non-null-assertion': 'warn',
 
       '@typescript-eslint/no-floating-promises': 'warn',
@@ -186,6 +185,7 @@ export default defineFlatConfig([
       'perfectionist/sort-union-types': 'warn',
 
       'unicorn/no-null': 'off',
+      'unicorn/no-useless-spread': 'off',
       'unicorn/prefer-top-level-await': 'off',
       'unicorn/prevent-abbreviations': 'off',
     },
@@ -198,28 +198,18 @@ export default defineFlatConfig([
 
   // testing with vitest
   {
-    files: ['**/*.test.ts', '**/*.test.tsx'],
+    files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
     languageOptions: {
       globals: {
         ...globals.jest,
-        vi: true,
       },
     },
-    plugins: {
-      vitest: vitest,
-    },
+    plugins: { jest },
     rules: {
+      ...jest.configs['flat/recommended'].rules,
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/unbound-method': 'off',
-      'vitest/expect-expect': 'warn',
-      'vitest/no-commented-out-tests': 'warn',
-      'vitest/no-identical-title': 'warn',
-      'vitest/no-import-node-test': 'warn',
-      'vitest/require-local-test-context-for-concurrent-snapshots': 'warn',
-      'vitest/valid-describe-callback': 'warn',
-      'vitest/valid-expect': 'warn',
-      'vitest/valid-title': 'warn',
     },
   },
 

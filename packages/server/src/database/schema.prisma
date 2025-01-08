@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -17,9 +11,9 @@ model Farmer {
   id         Int      @id @default(autoincrement())
   name       String
   documentId String   @unique
-  farms      Farm[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  farms      Farm[]
 }
 
 model Farm {
@@ -31,21 +25,21 @@ model Farm {
   arableArea     Float
   vegetationArea Float
   farmerId       Int
-  farmer         Farmer    @relation(fields: [farmerId], references: [id], onDelete: Cascade)
-  harvests       Harvest[]
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+  farmer         Farmer    @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  harvests       Harvest[]
 }
 
 model Harvest {
   id        Int      @id @default(autoincrement())
   name      String
-  year      DateTime
+  year      String   @db.VarChar(4)
   farmId    Int
-  farm      Farm     @relation(fields: [farmId], references: [id], onDelete: Cascade)
-  crops     Crop[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  farm      Farm     @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  crops     Crop[]   @relation("CropToHarvest")
 }
 
 model Crop {
@@ -53,5 +47,5 @@ model Crop {
   name      String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  harvest   Harvest[]
+  harvest   Harvest[] @relation("CropToHarvest")
 }
