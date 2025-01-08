@@ -11,7 +11,8 @@
     "baseUrl": ".",
     "paths": {
       "@/testing-library": ["src/tests/testing-library"],
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@nestjs/swagger": ["node_modules/@nestjs/graphql/dist/extra/graphql-model-shim"]
     },
     "skipLibCheck": true,
     "isolatedModules": true,

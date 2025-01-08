@@ -1,16 +1,20 @@
-import type { AxiosResponse } from 'axios';
+import type { AxiosError } from 'axios';
 
 export class HttpError extends Error {
-  constructor(public response: AxiosResponse) {
-    super(response.statusText);
+  constructor(public error: AxiosError) {
+    super(error.code);
     this.name = 'HttpError';
   }
 
+  toString(): string {
+    return String(this.data.message);
+  }
+
   get data() {
-    return this.response.data;
+    return this.error.response?.data as Record<string, unknown>;
   }
 
   get status() {
-    return this.response.status;
+    return this.error.status;
   }
 }

@@ -1,16 +1,27 @@
 import { lazy } from 'react';
+import { Outlet } from 'react-router';
 import type { RouteObject } from 'react-router';
 
 import { farmerAction } from './action';
 
-const FarmerPage = lazy(() => import('./page'));
-const ErrorBoundary = lazy(() => import('./error'));
+const FarmerCreatePage = lazy(() => import('./create'));
+const FarmerListPage = lazy(() => import('./list'));
 
 const route: RouteObject = {
-  action: farmerAction,
-  element: <FarmerPage />,
-  ErrorBoundary,
-  path: 'farmer/create',
+  children: [
+    {
+      action: farmerAction,
+      element: <FarmerCreatePage />,
+      errorElement: <FarmerCreatePage />,
+      path: 'create',
+    },
+    {
+      element: <FarmerListPage />,
+      path: '',
+    },
+  ],
+  element: <Outlet />,
+  path: 'farmer',
 };
 
 export default route;

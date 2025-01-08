@@ -1,12 +1,10 @@
-interface ImportMetaEnv {
-  readonly PUBLIC_API_URL: string;
-  readonly PUBLIC_HOSTNAME: string;
-  readonly PUBLIC_MODE: 'development' | 'production';
-  readonly PUBLIC_PORT: number;
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      readonly MODE: 'development' | 'production';
+      readonly PUBLIC_API_BASE_URL: string;
+    }
+  }
 }
 
 declare module '*.svg' {

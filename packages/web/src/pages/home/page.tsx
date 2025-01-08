@@ -18,7 +18,10 @@ function HomePage() {
         p="2"
       >
         <Link to="/dashboard">{t('generalResume')}</Link>
+        <br />
+        <Link to="/farmer">{t('farmers')}</Link>
         <Link to="/farmer/create">{t('farmerRegistration')}</Link>
+        <br />
         <Link to="/farm/create">{t('farmRegistration')}</Link>
         <Link to="/harvest/create">{t('harvestRegistration')}</Link>
         <Link to="/crop/create">{t('cropRegistration')}</Link>

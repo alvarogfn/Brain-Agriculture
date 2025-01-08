@@ -1,4 +1,5 @@
-import { memo } from 'react';
+import type { ChangeEvent } from 'react';
+import { memo, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 
@@ -16,6 +17,7 @@ function FieldFormCombobox<FormValues extends FieldValues, Item>({
   control,
   disabled,
   items,
+  itemToKey = String,
   itemToString = String,
   label,
   name,
@@ -23,6 +25,12 @@ function FieldFormCombobox<FormValues extends FieldValues, Item>({
   onSelectedItemChange,
   placeholder,
 }: FieldFormComboboxProps<FormValues, Item>) {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <Controller
       control={control}
@@ -38,17 +46,20 @@ function FieldFormCombobox<FormValues extends FieldValues, Item>({
           }}
           onSelectedItemChange={({ selectedItem }) => {
             field.onChange(selectedItem);
+            setInputValue(itemToString(selectedItem));
             if (onSelectedItemChange) onSelectedItemChange(selectedItem);
           }}
-          renderInput={({ getInputProps, getLabelProps, selectedItem }) => {
+          renderInput={({ getInputProps, getLabelProps }) => {
             return (
               <Input
-                {...getInputProps({ ...field })}
-                containerProps={getLabelProps()}
+                {...getInputProps({
+                  ...field,
+                  onChange: handleChange,
+                  value: inputValue,
+                })}
                 label={label}
-                name={name}
+                labelProps={getLabelProps()}
                 placeholder={placeholder}
-                value={itemToString(selectedItem) ?? ''}
               />
             );
           }}
@@ -60,7 +71,7 @@ function FieldFormCombobox<FormValues extends FieldValues, Item>({
           }: ComboboxRenderItemProps<Item>) => (
             <Menu.Item
               aria-label={itemToString(item)}
-              key={itemToString(item)}
+              key={itemToKey(item)}
               selected={item === selectedItem || isHighlighted}
               {...getItemProps()}
             >

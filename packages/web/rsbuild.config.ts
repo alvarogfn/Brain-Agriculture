@@ -3,7 +3,7 @@ import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginSvgr } from '@rsbuild/plugin-svgr';
 
-const { MODE, PORT } = process.env || {};
+const { MODE, PORT, PUBLIC_API_BASE_URL } = process.env ?? {};
 
 const tags: HtmlTagDescriptor[] = [];
 
@@ -29,7 +29,8 @@ export default defineConfig({
   },
   source: {
     define: {
-      'import.meta.env.MODE': JSON.stringify(MODE),
+      'process.env.MODE': JSON.stringify(MODE),
+      'process.env.PUBLIC_API_BASE_URL': JSON.stringify(PUBLIC_API_BASE_URL),
     },
   },
 });

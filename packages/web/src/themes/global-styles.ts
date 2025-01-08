@@ -20,6 +20,7 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "Noto Sans", serif;
     font-weight: 400;
     font-style: normal;
+    font-size: 1.6rem;
   }
   
   button {

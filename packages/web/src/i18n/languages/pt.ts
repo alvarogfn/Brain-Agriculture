@@ -14,6 +14,7 @@ export default {
   farmCity: 'Cidade da Fazenda',
   farmerName: 'Nome do Produtor',
   farmerRegistration: 'Cadastro de Produtor',
+  farmers: 'Produtores Cadastrados',
   farmName: 'Nome da Fazenda',
   farmOwner: 'Proprietário da Fazenda',
   farmRegistration: 'Cadastro de Fazenda',
@@ -24,6 +25,8 @@ export default {
   harvestYear: 'Ano da Safra',
   identifier: 'CPF/CNPJ',
   inHectare: 'Em hectares',
+  loading: 'Carregando',
+  next: 'próxima',
   validations: {
     invalid: 'Campo no formato inválido.',
     number: {

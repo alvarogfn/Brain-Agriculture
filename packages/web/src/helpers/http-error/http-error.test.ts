@@ -15,7 +15,7 @@ describe('HttpError', () => {
     expect(error).toBeInstanceOf(Error);
     expect(error.name).toBe('HttpError');
     expect(error.message).toBe('Not Found');
-    expect(error.response).toBe(response);
+    expect(error.error).toBe(response);
     expect(error.data).toBe(response.data);
     expect(error.status).toBe(404);
   });

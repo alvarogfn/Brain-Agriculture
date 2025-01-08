@@ -48,7 +48,7 @@ function Combobox<Item>(
 
   const forkedSelectRef = useForkRef(ref, refs.setReference);
 
-  const labelElement = useMemo(
+  const inputElement = useMemo(
     () =>
       renderInput({
         getInputProps: (inputProps) =>
@@ -119,7 +119,7 @@ function Combobox<Item>(
 
   return (
     <>
-      {labelElement}
+      {inputElement}
       {createPortal(menuElement, document.body)}
     </>
   );

@@ -1,15 +1,16 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import type { RouteObject } from 'react-router';
+
+import i18n from '@/i18n';
 
 import farmCreateAction from './action';
 
 const FarmCreatePage = lazy(() => import('./page'));
-const ErrorBoundary = lazy(() => import('./error'));
 
 const route: RouteObject = {
   action: farmCreateAction,
   element: <FarmCreatePage />,
-  ErrorBoundary,
+  errorElement: <FarmCreatePage />,
   path: 'farm/create',
 };
 

@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box } from '@/components/box';
 import { Button } from '@/components/button';
 import { FieldForm } from '@/components/field-form';
+import { FieldFormFarmer } from '@/components/field-form-farmer';
 import { Text } from '@/components/text';
 import { useTranslation } from '@/i18n';
 import type { FarmCreateSchema } from '@/validators/farm-create-schema';
@@ -32,13 +33,10 @@ function FarmCreatePage() {
       <fetcher.Form onSubmit={methods.handleSubmit(handleSubmit)}>
         <Box display="flex" flexDirection="column" gap="3">
           <Text as="h2">{t('createNewFarm')}</Text>
-          <FieldForm
+          <FieldFormFarmer
             control={methods.control}
-            items={[{ id: 1, name: 'John Doe' }]}
-            itemToString={(option) => option?.name ?? ''}
             label={t('farmOwner')}
             name="farmOwner"
-            type="combobox"
           />
           <FieldForm
             control={methods.control}
