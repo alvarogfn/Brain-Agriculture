@@ -1,11 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { FarmerController } from './farmer.controller';
-import { FarmerService } from '../service/farmer.service';
-import { mock } from 'jest-mock-extended';
-import { Prisma } from '@prisma/client';
 import { BadRequestException } from '@nestjs/common';
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
+import type { Prisma } from '@prisma/client';
+import type { FarmerFindAllResponseContent } from 'brain-agriculture-backend-types';
+import { mock } from 'jest-mock-extended';
+
 import { paginationFactory, queryParamsFactory } from '@/shared/factories';
-import { FarmerFindAllResponseContent } from 'brain-agriculture-backend-types';
+
+import { FarmerService } from '../service/farmer.service';
+import { FarmerController } from './farmer.controller';
 
 describe('FarmerController', () => {
   let controller: FarmerController;

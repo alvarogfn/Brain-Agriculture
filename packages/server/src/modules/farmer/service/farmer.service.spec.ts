@@ -1,16 +1,16 @@
 import { BadRequestException } from '@nestjs/common';
 import type { TestingModule } from '@nestjs/testing';
 import { Test } from '@nestjs/testing';
+import type { Prisma } from '@prisma/client';
+import { mockDeep } from 'jest-mock-extended';
 
 import { PrismaService } from '@/database/prisma.service';
 import { CNPJValidationService } from '@/shared/cnpj-validation/cnpj-validation.service';
 import { CPFValidationService } from '@/shared/cpf-validation/cpf-validation.service';
-import { PaginateService } from '@/shared/paginate/paginate.service';
-import { mock, mockDeep } from 'jest-mock-extended';
-import { FarmerService } from './farmer.service';
-import { Prisma } from '@prisma/client';
-import { PaginationParams } from 'brain-agriculture-backend-types';
 import { paginationFactory, queryParamsFactory } from '@/shared/factories';
+import { PaginateService } from '@/shared/paginate/paginate.service';
+
+import { FarmerService } from './farmer.service';
 
 describe('FarmerService', () => {
   let service: FarmerService;

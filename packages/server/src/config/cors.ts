@@ -5,6 +5,7 @@ export function setupCors(app: INestApplication) {
   const configService = app.get(ConfigService);
 
   const origin = configService.get<string>('origin');
+  console.log(origin);
 
   app.enableCors({
     credentials: true,
